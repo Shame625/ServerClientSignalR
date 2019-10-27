@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JuricaWeb.Filters;
+using JuricaWeb.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace JuricaWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.Filters.Add(typeof(RequestFilter))).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //services.AddScoped<RequestFilter>();
             services.AddSignalR();
             services.AddSwaggerGen(c =>
@@ -43,8 +44,7 @@ namespace JuricaWeb
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseMvc();
+            app.UseRequestMiddleware();
             app.UseSignalR(routes =>
             {
                 routes.MapHub<InfoHub>("/InfoHub");
@@ -55,6 +55,7 @@ namespace JuricaWeb
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "post API V1");
             });
 
+            app.UseMvc();
         }
     }
 }
