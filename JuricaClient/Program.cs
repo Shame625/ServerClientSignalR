@@ -10,7 +10,7 @@ namespace JuricaClient
         private static void Main(string[] args)
         {
             var Connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:59686/Info")
+                .WithUrl("http://localhost:59686/InfoHub")
                 .Build();
 
             Connection.StartAsync().ContinueWith(task => {

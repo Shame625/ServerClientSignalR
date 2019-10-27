@@ -12,15 +12,8 @@ namespace JuricaWeb.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ServiceFilter(typeof(RequestFilter))]
     public class ValuesController : ControllerBase
     {
-        private readonly IHubContext<Info> _info;
-        public ValuesController(IHubContext<Info> info)
-        {
-            _info = info;
-        }
-
         // GET api/values
         [HttpGet]
         public async Task<ActionResult<IEnumerable<string>>> Get()

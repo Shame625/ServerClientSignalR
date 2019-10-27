@@ -3,16 +3,13 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace JuricaWeb.Filters
 {
     public class RequestFilter : IActionFilter
     {
-        private readonly IHubContext<Info> _info;
-        public RequestFilter(IHubContext<Info> info)
+        private readonly IHubContext<InfoHub> _info;
+        public RequestFilter(IHubContext<InfoHub> info)
         {
             _info = info;
         }

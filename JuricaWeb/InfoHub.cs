@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace JuricaWeb
 {
-    public class Info : Hub
+    public class InfoHub : Hub
     {
         public async Task Send(InfoModel model)
         {
