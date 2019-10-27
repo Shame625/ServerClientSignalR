@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JuricaInfrastructure;
+using JuricaWeb.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
@@ -11,6 +12,7 @@ namespace JuricaWeb.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ServiceFilter(typeof(RequestFilter))]
     public class ValuesController : ControllerBase
     {
         private readonly IHubContext<Info> _info;
@@ -23,9 +25,6 @@ namespace JuricaWeb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<string>>> Get()
         {
-            var model = new InfoModel { Time = DateTime.Now, Message = "Pozdrav, iz ApiKontrolera"};
-            await _info.Clients.All.SendAsync("ReciveInfo", JsonConvert.SerializeObject(model));
-
             return new string[] { "value1", "value2" };
         }
 
